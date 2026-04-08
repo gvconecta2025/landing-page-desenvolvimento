@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desenvolvimento Sistemático — Prof. Luiz Henrique Magalhães</title>
+  <meta name="description" content="Mais de 20 anos identificando a lacuna entre a casa e a escola que vem prejudicando adultos há décadas. Conheça o Desenvolvimento Sistemático." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f9f9f9;
+      --surface:   #ffffff;
+      --border:    #e5e5e5;
+      --text:      #0d0d0d;
+      --muted:     #6b6b6b;
+      --accent:    #1a6baa;
+      --accent-dk: #145490;
+      --green:     #25d366;
+      --green-dk:  #1da851;
+      --radius:    12px;
+      --shadow:    0 2px 16px rgba(0,0,0,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ─────────────────────────────────── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Lora', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.3px;
+    }
+
+    .logo span {
+      color: var(--muted);
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    /* ── HERO ────────────────────────────────────── */
+    .hero {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 52px 24px 0;
+      text-align: center;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(26,107,170,0.08);
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(26px, 5vw, 38px);
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 500px;
+      margin: 0 auto 36px;
+      font-weight: 300;
+    }
+
+    /* ── AUTHOR STRIP ────────────────────────────── */
+    .author-strip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 8px 16px 8px 8px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .author-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #2a8fd4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lora', serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .author-info {
+      text-align: left;
+    }
+
+    .author-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .author-role {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* ── VIDEO BLOCK ─────────────────────────────── */
+    .video-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px;
+      animation: fadeUp 0.7s 0.15s ease both;
+    }
+
+    .video-wrapper {
+      background: #000;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 16 / 9;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+    }
+
+    .video-wrapper video,
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: none;
+    }
+
+    /* placeholder quando não há vídeo */
+    .video-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0d1f33 0%, #1a3a5c 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      color: #fff;
+    }
+
+    .video-placeholder svg {
+      opacity: 0.6;
+    }
+
+    .video-placeholder p {
+      font-size: 14px;
+      opacity: 0.5;
+      font-style: italic;
+    }
+
+    .video-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    /* ── PROGRESS BAR ────────────────────────────── */
+    .progress-bar-wrap {
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 1s linear;
+    }
+
+    /* ── CTA BUTTONS ─────────────────────────────── */
+    .cta-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 24px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .cta-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cta-label {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .btn-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 18px 24px;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+      margin-bottom: 16px;
+    }
+
+    .btn-primary:hover {
+      background: var(--green-dk);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.4);
+    }
+
+    .btn-primary svg { flex-shrink: 0; }
+
+    .btn-primary .btn-text { text-align: left; line-height: 1.2; }
+    .btn-primary .btn-title { font-weight: 500; font-size: 15px; }
+    .btn-primary .btn-sub { font-size: 12px; opacity: 0.85; font-weight: 300; }
+
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 10px;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+      text-align: center;
+      line-height: 1.3;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(26,107,170,0.1);
+    }
+
+    .btn-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(26,107,170,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ── DIVIDER ─────────────────────────────────── */
+    .divider {
+      max-width: 680px;
+      margin: 48px auto 0;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider-text {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── SOCIAL PROOF ────────────────────────────── */
+    .proof-section {
+      max-width: 680px;
+      margin: 32px auto 0;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .proof-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 14px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .proof-number {
+      font-family: 'Lora', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .proof-label {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ── BOOK STRIP ──────────────────────────────── */
+    .book-section {
+      max-width: 680px;
+      margin: 32px auto 0;
+      padding: 0 24px;
+    }
+
+    .book-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .book-cover {
+      width: 52px;
+      height: 70px;
+      background: linear-gradient(160deg, var(--accent) 0%, #0d3f6e 100%);
+      border-radius: 4px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.15);
+    }
+
+    .book-cover svg { opacity: 0.8; }
+
+    .book-info { flex: 1; }
+
+    .book-badge {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .book-title {
+      font-family: 'Lora', serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .book-sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer {
+      max-width: 680px;
+      margin: 48px auto 0;
+      padding: 32px 24px 40px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #2a8fd4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lora', serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      margin: 0 auto 12px;
+    }
+
+    .footer-name {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .footer-role {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .footer-ig {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-ig:hover { text-decoration: underline; }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 24px;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 480px) {
+      h1 { font-size: 24px; }
+      .btn-grid { grid-template-columns: 1fr; }
+      .proof-section { grid-template-columns: 1fr; }
+      .btn-secondary { flex-direction: row; justify-content: flex-start; padding: 14px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">PLH <span>Preparatórios</span></div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="eyebrow">Novo livro</span>
+    <h1>Desenvolvimento Sistemático<br>de Adolescentes e Jovens</h1>
+    <p class="subtitle">Como ele afeta a vida de seu filho?</p>
+
+    <div class="author-strip">
+      <div class="author-avatar">L</div>
+      <div class="author-info">
+        <div class="author-name">Prof. Luiz Henrique Magalhães</div>
+        <div class="author-role">Professor · Formador · Autor</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="video-section">
+    <div class="video-wrapper">
+      <!--
+        INSTRUÇÃO: Substitua o conteúdo abaixo pelo seu vídeo.
+        Opção 1 — Arquivo local ou CDN:
+          <video id="mainVideo" autoplay playsinline muted="false" src="SEU_VIDEO.mp4"></video>
+        Opção 2 — YouTube (embed sem controles):
+          <iframe id="mainVideo" src="https://www.youtube.com/embed/SEU_ID?autoplay=1&controls=0&modestbranding=1&rel=0&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      -->
+      <div class="video-placeholder">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="22" stroke="white" stroke-width="2"/>
+          <polygon points="19,15 37,24 19,33" fill="white"/>
+        </svg>
+        <p>Insira seu vídeo aqui</p>
+      </div>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <p class="video-note">Assista até o final para ver as opções disponíveis</p>
+  </section>
+
+  <!-- CTA BUTTONS — aparecem após 5 min -->
+  <section class="cta-section" id="ctaSection">
+    <p class="cta-label">Escolha por onde quer começar</p>
+
+    <!-- BOTÃO PRINCIPAL — WHATSAPP -->
+    <a href="https://wa.me/5533999333644?text=Ol%C3%A1%2C%20Professor%20Luiz!%20Assisti%20ao%20v%C3%ADdeo%20e%20quero%20saber%20mais%20sobre%20o%20Desenvolvimento%20Sistem%C3%A1tico."
+       class="btn-primary" target="_blank" rel="noopener">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.856L.057 23.454a.5.5 0 0 0 .608.608l5.598-1.477A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.655-.51-5.178-1.396l-.372-.22-3.852 1.016 1.016-3.853-.22-.372A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+      </svg>
+      <div class="btn-text">
+        <div class="btn-title">Falar com o Professor</div>
+        <div class="btn-sub">Atendimento direto pelo WhatsApp</div>
+      </div>
+    </a>
+
+    <!-- BOTÕES SECUNDÁRIOS -->
+    <div class="btn-grid">
+
+      <a href="https://mapa-adulto-pronto.lovable.app" class="btn-secondary" target="_blank" rel="noopener">
+        <div class="btn-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a6baa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        Comunidade
+      </a>
+
+      <a href="https://mapa-adulto-pronto.lovable.app" class="btn-secondary" target="_blank" rel="noopener">
+        <div class="btn-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a6baa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+        </div>
+        Fazer o Teste
+      </a>
+
+      <a href="#" class="btn-secondary" target="_blank" rel="noopener">
+        <div class="btn-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a6baa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+        </div>
+        Ebook Gratuito
+      </a>
+
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-text">sobre o autor</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- SOCIAL PROOF -->
+  <section class="proof-section">
+    <div class="proof-card">
+      <div class="proof-number">+20</div>
+      <div class="proof-label">anos acompanhando jovens e famílias</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-number">8</div>
+      <div class="proof-label">livros publicados sobre desenvolvimento</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-number">10</div>
+      <div class="proof-label">áreas do desenvolvimento sistemático</div>
+    </div>
+  </section>
+
+  <!-- BOOK STRIP -->
+  <section class="book-section" style="margin-top: 20px;">
+    <div class="book-card">
+      <div class="book-cover">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+      </div>
+      <div class="book-info">
+        <div class="book-badge">Novo Livro</div>
+        <div class="book-title">Desenvolvimento Sistemático de Adolescentes e Jovens</div>
+        <div class="book-sub">Como ele afeta a vida de seu filho?</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-avatar">L</div>
+    <div class="footer-name">Luiz Henrique Magalhães</div>
+    <div class="footer-role">Professor · Formador · Fundador do PLH Preparatórios</div>
+    <a href="https://instagram.com/professorluiz.plh" class="footer-ig" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+      </svg>
+      @professorluiz.plh
+    </a>
+    <p class="footer-copy">© 2026 PLH Preparatórios · Todos os direitos reservados</p>
+  </footer>
+
+  <script>
+    // ── TIMER: Botões aparecem após 5 minutos (300 segundos) ──
+    const CTA_DELAY = 300; // segundos
+    const ctaSection = document.getElementById('ctaSection');
+    const progressFill = document.getElementById('progressFill');
+    let elapsed = 0;
+
+    const timer = setInterval(() => {
+      elapsed++;
+      const pct = Math.min((elapsed / CTA_DELAY) * 100, 100);
+      progressFill.style.width = pct + '%';
+
+      if (elapsed >= CTA_DELAY) {
+        clearInterval(timer);
+        ctaSection.classList.add('visible');
+        ctaSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 1000);
+
+    // ── DEV MODE: descomente a linha abaixo para testar os botões imediatamente ──
+    // ctaSection.classList.add('visible');
+  </script>
+
+</body>
+</html>
