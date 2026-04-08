@@ -12,24 +12,27 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* PALETA PREMIUM BASEADA NA IMAGEM */
-      --text-main: #f4ece2; /* Creme cor de papel antigo */
+      /* PALETA PREMIUM AJUSTADA PARA SIMULAR TEXTURA */
+      --bg-top: #1a1612; /* Madeira escura */
+      --bg-bottom: #f2e9dc; /* Papel antigo/Creme */
+      --text-main: #f4ece2; /* Creme */
       --text-muted: #b5a48b; /* Bege suave */
-      --accent: #d4bd97; /* Dourado suave / Bege livro */
+      --accent: #d4bd97; /* Dourado suave */
       --green: #25d366; /* Verde WhatsApp */
       --radius: 8px; /* Bordas mais retas */
-      --shadow-element: 0 15px 35px rgba(0,0,0,0.6); /* Sombra profunda para relevo */
-      --shadow-button: 0 4px 10px rgba(0,0,0,0.5); /* Sombra menor para botões */
+      
+      /* MUDANÇA: SOMBRAS ULTRA-PROFUNDAS PARA SIMULAR RELEVO SOBRE A PÁGINA */
+      --shadow-author: 0 10px 30px rgba(0,0,0,0.6);
+      --shadow-element: 0 15px 45px rgba(0,0,0,0.7);
+      --shadow-button: 0 5px 15px rgba(0,0,0,0.6);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'DM Sans', sans-serif;
-      /* MUDANÇA CRUCIAL: IMAGEM DE FUNDO REAL PARA TEXTURA */
-      background-image: url('textura-madeira-fundo.jpg'); /* VOCÊ PRECISA DESTA IMAGEM NO GITHUB */
-      background-size: cover;
-      background-position: center top;
+      /* MUDANÇA: SIMULAÇÃO DE MADEIRA ESCONDENDO PARA CREME NO FINAL */
+      background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-top) 70%, var(--bg-bottom) 100%);
       background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
@@ -111,7 +114,7 @@
       border-radius: 4px;
       padding: 12px 25px;
       margin-bottom: 50px;
-      box-shadow: var(--shadow-element);
+      box-shadow: var(--shadow-author);
     }
 
     .author-avatar {
@@ -161,12 +164,10 @@
 
     .btn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     
-    /* MUDANÇA: BOTÕES COM TEXTURA E MAIS RELEVO */
+    /* MUDANÇA: BOTÕES COM GRADIENTE INTERNO E RELEVO PARA SIMULAR OBJETO FÍSICO */
     .btn-secondary {
-      /* VOCÊ PRECISA DESTA IMAGEM NO GITHUB */
-      background-image: url('textura-botao.jpg'); 
-      background-size: cover;
-      background-position: center;
+      /* Gradiente sutil para simular textura/curvatura */
+      background: linear-gradient(135deg, rgba(30,27,24,0.9) 0%, rgba(20,18,15,0.95) 100%);
       border: 1px solid rgba(212, 189, 151, 0.25); 
       color: var(--text-main);
       padding: 20px; text-decoration: none; text-align: center; font-size: 14px;
@@ -174,7 +175,7 @@
       box-shadow: var(--shadow-button);
       display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
-    .btn-secondary:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.6); }
+    .btn-secondary:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.7); }
 
     /* ── PROOF SECTION ───────────────────────────── */
     .proof-section { 
@@ -182,10 +183,7 @@
         display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px;
     }
     .proof-card {
-      /* MUDANÇA: FUNDO ESCURO E BORDAS COMO CAPA DE LIVRO */
-      background-image: url('textura-botao.jpg'); 
-      background-size: cover;
-      background-position: center;
+      background: linear-gradient(135deg, rgba(30,27,24,0.9) 0%, rgba(20,18,15,0.95) 100%);
       border: 1px solid rgba(212, 189, 151, 0.2);
       padding: 25px; text-align: center;
       border-radius: var(--radius);
@@ -277,7 +275,9 @@
   </footer>
 
   <script>
-    const CTA_DELAY = 300; 
+    // TIMER REDUZIDO PARA 10 SEGUNDOS TEMPORARIAMENTE PARA SEUS TESTES
+    // DEPOIS MUDE PARA 300 ANTES DO LANÇAMENTO
+    const CTA_DELAY = 10; 
     const ctaSection = document.getElementById('ctaSection');
     const progressFill = document.getElementById('progressFill');
     let elapsed = 0;
