@@ -3,706 +3,709 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Desenvolvimento Sistemático — Prof. Luiz Henrique Magalhães</title>
-  <meta name="description" content="Mais de 20 anos identificando a lacuna entre a casa e a escola que vem prejudicando adultos há décadas. Conheça o Desenvolvimento Sistemático." />
+  <title>Prof. Luiz Henrique Magalhães — Desenvolvimento Sistemático</title>
+  <meta name="description" content="Mais de 20 anos identificando a lacuna entre a casa e a escola. Conheça o trabalho do Professor Luiz Henrique Magalhães." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* PALETA DE CORES PREMIUM - ESTILO BIBLIOTECA */
-      --bg-top: #1a1612; 
-      --bg-bottom: #2a241d;
-      --surface: rgba(20, 18, 15, 0.85); 
-      --border: rgba(212, 189, 151, 0.25); 
-      --text: #f4ece2; 
-      --muted: #b5a48b; 
-      --accent: #d4bd97; 
-      --accent-dk: #b89f78;
-      --green: #25d366;
-      --green-dk: #1da851;
-      --radius: 8px; 
-      --shadow: 0 10px 30px rgba(0,0,0,0.5); 
-      --shadow-btn: 0 5px 15px rgba(0,0,0,0.4);
+      /* ── PALETA CAPPUCCINO ── */
+      --cap-dark:    #1c1410;   /* café escuro — topo e rodapé */
+      --cap-mid:     #3b2a1e;   /* café médio */
+      --cap-warm:    #6b4c35;   /* caramelo */
+      --cap-latte:   #c8a882;   /* latte claro — centro */
+      --cap-cream:   #e8d5b8;   /* creme — mais claro */
+      --cap-foam:    #f5ede0;   /* espuma — texto claro */
+
+      /* ── DOURADO PARA LINHAS ── */
+      --gold:        rgba(212, 178, 110, 0.55);
+      --gold-bright: rgba(212, 178, 110, 0.9);
+      --gold-glow:   rgba(212, 178, 110, 0.10);
+
+      /* ── SUPERFÍCIES ── */
+      --surface-dk:  rgba(15, 10, 6, 0.55);
+      --surface-md:  rgba(30, 20, 12, 0.50);
+      --surface-lt:  rgba(255, 255, 255, 0.06);
+
+      --text-light:  #f5ede0;
+      --text-mid:    #d4b896;
+      --text-muted:  #9a7d64;
+
+      --radius: 10px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'DM Sans', sans-serif;
-      background: linear-gradient(135deg, var(--bg-top), var(--bg-bottom));
-      background-attachment: fixed;
-      color: var(--text);
+      color: var(--text-light);
       min-height: 100vh;
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+
+      /* DEGRADÊ CAPPUCCINO: escuro → claro (centro) → escuro */
+      background:
+        radial-gradient(ellipse 120% 55% at 50% 48%,
+          #7a5540 0%,
+          #4a3022 30%,
+          #2a1c12 60%,
+          #1c1410 100%
+        );
+      background-attachment: fixed;
+    }
+
+    /* Grain sutil */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Zona clara no centro da página */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 35%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100vw;
+      height: 50vh;
+      background: radial-gradient(ellipse at center,
+        rgba(180, 130, 80, 0.10) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+      z-index: 0;
     }
 
     /* ── HEADER ─────────────────────────────────── */
     header {
-      background: rgba(0,0,0,0.5);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(8px);
-      padding: 14px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(18, 12, 8, 0.80);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--gold);
+      padding: 13px 24px;
+      display: flex; align-items: center; justify-content: center;
     }
 
     .logo {
       font-family: 'Lora', serif;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.3px;
+      font-size: 14px; font-weight: 600;
+      color: var(--cap-cream);
+      letter-spacing: 0.8px;
     }
-
     .logo span {
-      color: var(--muted);
-      font-weight: 400;
-      font-style: italic;
+      color: var(--text-muted);
+      font-weight: 400; font-style: italic;
     }
 
     /* ── HERO ────────────────────────────────────── */
     .hero {
-      max-width: 680px;
+      position: relative; z-index: 1;
+      max-width: 640px;
       margin: 0 auto;
-      padding: 52px 24px 0;
+      padding: 64px 24px 0;
       text-align: center;
-      animation: fadeUp 0.7s ease both;
+      animation: fadeUp 0.9s ease both;
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
+      from { opacity: 0; transform: translateY(22px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     .eyebrow {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 1.6px;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: rgba(212,189,151,0.1);
-      border: 1px solid var(--border);
-      padding: 5px 12px;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--cap-cream);
+      background: var(--gold-glow);
+      border: 1px solid var(--gold);
+      padding: 5px 16px;
       border-radius: 20px;
-      margin-bottom: 22px;
+      margin-bottom: 26px;
+    }
+
+    .eyebrow::before, .eyebrow::after {
+      content: '✦';
+      font-size: 7px;
+      color: var(--gold-bright);
+      opacity: 0.8;
     }
 
     h1 {
       font-family: 'Lora', serif;
-      font-size: clamp(26px, 5vw, 38px);
+      font-size: clamp(24px, 5.5vw, 40px);
       font-weight: 700;
-      line-height: 1.25;
-      color: #ffffff;
-      margin-bottom: 16px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    }
-
-    h1 em {
-      font-style: italic;
-      color: var(--accent);
+      line-height: 1.22;
+      color: var(--cap-foam);
+      margin-bottom: 14px;
+      /* sem itálico — mesma fonte uniforme */
     }
 
     .subtitle {
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.6;
-      max-width: 500px;
-      margin: 0 auto 36px;
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.65;
+      max-width: 440px;
+      margin: 0 auto 34px;
       font-weight: 300;
+      font-style: italic;
     }
 
     /* ── AUTHOR STRIP ────────────────────────────── */
     .author-strip {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--surface-dk);
+      border: 1px solid var(--gold);
       border-radius: 40px;
-      padding: 8px 16px 8px 8px;
-      margin-bottom: 40px;
-      box-shadow: var(--shadow);
+      padding: 7px 16px 7px 7px;
+      margin-bottom: 48px;
     }
 
     .author-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent-dk));
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--cap-latte), var(--cap-warm));
+      display: flex; align-items: center; justify-content: center;
       font-family: 'Lora', serif;
-      font-weight: 700;
-      font-size: 15px;
-      color: #1a1612;
+      font-weight: 700; font-size: 14px;
+      color: var(--cap-dark);
       flex-shrink: 0;
     }
 
-    .author-info {
-      text-align: left;
-    }
+    .author-name { font-size: 12px; font-weight: 500; color: var(--text-light); line-height: 1.2; }
+    .author-role { font-size: 10px; color: var(--text-muted); }
 
-    .author-name {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text);
-      line-height: 1.2;
-    }
-
-    .author-role {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    /* ── VIDEO BLOCK ─────────────────────────────── */
+    /* ── VIDEO ───────────────────────────────────── */
     .video-section {
-      max-width: 680px;
-      margin: 0 auto;
+      position: relative; z-index: 1;
+      max-width: 640px; margin: 0 auto;
       padding: 0 24px;
-      animation: fadeUp 0.7s 0.15s ease both;
+      animation: fadeUp 0.9s 0.12s ease both;
     }
 
     .video-wrapper {
-      background: #000;
-      border: 1px solid var(--border);
+      background: #0a0604;
+      border: 1px solid var(--gold);
       border-radius: var(--radius);
       overflow: hidden;
-      position: relative;
       aspect-ratio: 16 / 9;
-      box-shadow: var(--shadow);
+      box-shadow:
+        0 24px 64px rgba(0,0,0,0.65),
+        0 0 0 1px rgba(255,255,255,0.03),
+        inset 0 1px 0 rgba(212,178,110,0.08);
     }
 
     .video-wrapper video,
-    .video-wrapper iframe {
-      width: 100%;
-      height: 100%;
-      display: block;
-      border: none;
-    }
+    .video-wrapper iframe { width: 100%; height: 100%; display: block; border: none; }
 
     .video-placeholder {
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, #2a241d 0%, #1a1612 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      color: var(--accent);
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at center, #3b2a1e 0%, #100a06 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 14px;
     }
 
-    .video-placeholder svg {
-      opacity: 0.8;
+    .video-placeholder svg { color: var(--cap-latte); opacity: 0.7; }
+    .video-placeholder p { font-size: 12px; color: var(--text-muted); font-style: italic; }
+
+    .video-meta {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-top: 9px; padding: 0 2px;
     }
 
-    .video-placeholder p {
-      font-size: 14px;
-      opacity: 0.8;
-      font-style: italic;
-    }
+    .video-note { font-size: 11px; color: var(--text-muted); font-style: italic; }
+    .video-time { font-size: 11px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
 
-    .video-note {
-      text-align: center;
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 12px;
-      font-style: italic;
-    }
-
-    /* ── PROGRESS BAR ────────────────────────────── */
     .progress-bar-wrap {
-      height: 3px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 2px;
-      margin-top: 10px;
-      overflow: hidden;
+      height: 1px;
+      background: rgba(212,178,110,0.15);
+      border-radius: 1px;
+      margin-top: 8px; overflow: hidden;
     }
 
     .progress-bar-fill {
       height: 100%;
-      background: var(--accent);
-      border-radius: 2px;
-      width: 0%;
-      transition: width 1s linear;
+      background: linear-gradient(90deg, var(--cap-warm), var(--cap-latte));
+      width: 0%; transition: width 1s linear;
     }
 
     /* ── CTA BUTTONS ─────────────────────────────── */
     .cta-section {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 40px 24px 0;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      position: relative; z-index: 1;
+      max-width: 640px; margin: 0 auto;
+      padding: 44px 24px 0;
       display: none;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
-    .cta-section.visible {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .cta-section.visible { display: block; }
+    .cta-section.animate { opacity: 1; transform: translateY(0); }
 
     .cta-label {
       text-align: center;
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 20px;
-      font-weight: 400;
+      font-size: 11px; color: var(--text-muted);
+      margin-bottom: 18px;
+      letter-spacing: 1px; text-transform: uppercase;
     }
 
-    .btn-primary {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 18px 24px;
-      background: var(--green);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
-      margin-bottom: 16px;
-    }
-
-    .btn-primary:hover {
-      background: var(--green-dk);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 28px rgba(37,211,102,0.4);
-    }
-
-    .btn-primary svg { flex-shrink: 0; }
-    .btn-primary .btn-text { text-align: left; line-height: 1.2; }
-    .btn-primary .btn-title { font-weight: 500; font-size: 15px; }
-    .btn-primary .btn-sub { font-size: 12px; opacity: 0.85; font-weight: 300; }
-
-    .btn-grid {
+    .btn-grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
 
-    .btn-secondary {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 16px 10px;
-      background: linear-gradient(135deg, rgba(30,27,24,0.9) 0%, rgba(20,18,15,0.95) 100%);
-      color: var(--text);
-      border: 1px solid var(--border);
+    .btn-card {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px; padding: 22px 12px;
+      background: var(--surface-md);
+      border: 1px solid var(--gold);
       border-radius: var(--radius);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 400;
       text-decoration: none;
+      color: var(--text-light);
+      font-size: 12px; font-weight: 400;
+      text-align: center; line-height: 1.35;
+      transition: border-color 0.25s, background 0.25s, transform 0.2s, box-shadow 0.25s;
       cursor: pointer;
-      transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
-      text-align: center;
-      line-height: 1.3;
-      box-shadow: var(--shadow-btn);
+      backdrop-filter: blur(4px);
     }
 
-    .btn-secondary:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    .btn-card:hover {
+      border-color: var(--gold-bright);
+      background: rgba(100, 70, 40, 0.30);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 12px rgba(212,178,110,0.08);
     }
 
-    .btn-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(212,189,151,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+    .btn-card-icon {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--gold-glow);
+      border: 1px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
     }
 
-    .btn-icon svg { stroke: var(--accent); }
+    .btn-card-icon svg { stroke: var(--cap-latte); }
 
-    /* ── DIVIDER ─────────────────────────────────── */
-    .divider {
-      max-width: 680px;
-      margin: 48px auto 0;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .divider-line {
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .divider-text {
-      font-size: 11px;
-      color: var(--muted);
-      white-space: nowrap;
-      letter-spacing: 0.5px;
-    }
-
-    /* ── SOCIAL PROOF ────────────────────────────── */
-    .proof-section {
-      max-width: 680px;
-      margin: 32px auto 0;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .proof-card {
-      background: linear-gradient(135deg, rgba(30,27,24,0.9) 0%, rgba(20,18,15,0.95) 100%);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 14px;
-      text-align: center;
-      box-shadow: var(--shadow);
-    }
-
-    .proof-number {
-      font-family: 'Lora', serif;
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .proof-label {
-      font-size: 11px;
-      color: var(--muted);
+    .btn-card-label {
+      font-size: 11px; font-weight: 500;
+      color: var(--cap-cream);
       line-height: 1.4;
     }
 
-    /* ── MOCKUP DE LIVRO PREMIUM (O QUE FALTAVA) ── */
-    .mockup-section {
-      max-width: 680px;
-      margin: 40px auto 0;
+    /* ── SEPARATOR ───────────────────────────────── */
+    .sep {
+      position: relative; z-index: 1;
+      max-width: 640px; margin: 56px auto 0;
+      padding: 0 24px;
+      display: flex; align-items: center; gap: 14px;
+    }
+
+    .sep-line { flex: 1; height: 1px; background: var(--gold); }
+    .sep-deco {
+      font-size: 10px; color: var(--cap-latte);
+      letter-spacing: 2px; text-transform: uppercase; white-space: nowrap;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sep-deco::before, .sep-deco::after {
+      content: '✦'; font-size: 8px; color: var(--gold-bright);
+    }
+
+    /* ── PROOF ───────────────────────────────────── */
+    .proof-section {
+      position: relative; z-index: 1;
+      max-width: 640px; margin: 28px auto 0;
+      padding: 0 24px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    }
+
+    .proof-card {
+      background: var(--surface-md);
+      border: 1px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 22px 12px; text-align: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .proof-num {
+      font-family: 'Lora', serif;
+      font-size: 26px; font-weight: 700;
+      color: var(--cap-latte); line-height: 1; margin-bottom: 6px;
+    }
+
+    .proof-lbl { font-size: 10px; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── BOOK SECTION ────────────────────────────── */
+    .book-section {
+      position: relative; z-index: 1;
+      max-width: 640px; margin: 28px auto 0;
       padding: 0 24px;
     }
 
-    .mockup-card {
-      background: linear-gradient(135deg, rgba(30,27,24,0.9) 0%, rgba(15,13,11,0.95) 100%);
-      border: 1px solid var(--border);
+    .book-card {
+      background: linear-gradient(135deg,
+        rgba(28,20,12,0.92) 0%,
+        rgba(45,32,18,0.88) 50%,
+        rgba(22,15,9,0.96) 100%
+      );
+      border: 1px solid var(--gold);
       border-radius: var(--radius);
-      padding: 30px;
-      display: flex;
-      gap: 24px;
-      align-items: center;
-      box-shadow: var(--shadow);
+      padding: 30px 26px;
+      display: flex; gap: 26px; align-items: center;
+      box-shadow:
+        0 24px 60px rgba(0,0,0,0.55),
+        inset 0 1px 0 rgba(212,178,110,0.12);
+      position: relative; overflow: hidden;
+      backdrop-filter: blur(6px);
     }
 
-    /* Efeito 3D do Livro via CSS */
-    .mockup-book-wrapper {
-      perspective: 1000px;
-      flex-shrink: 0;
-    }
-
-    .mockup-book {
-      width: 110px;
-      height: 160px;
-      background: #112233; /* Cor base da capa do livro escuro */
-      background: linear-gradient(135deg, #1e3a5f 0%, #0a1526 100%);
-      border-radius: 2px 6px 6px 2px;
-      position: relative;
-      transform: rotateY(-15deg);
-      transform-style: preserve-3d;
-      box-shadow: inset 4px 0 10px rgba(0,0,0,0.5), 10px 10px 20px rgba(0,0,0,0.6);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      text-align: center;
-      border-left: 3px solid rgba(255,255,255,0.2); /* Efeito de brilho na lombada */
-    }
-
-    /* Detalhe das páginas (lombada direita) */
-    .mockup-book::after {
+    /* Reflexo dourado */
+    .book-card::before {
       content: '';
-      position: absolute;
-      top: 2px;
-      right: -6px;
-      width: 6px;
-      height: 156px;
-      background: #e0d5c1;
-      transform: translateZ(-1px);
+      position: absolute; top: -50px; right: -50px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(212,178,110,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* ── MOCKUP 3D ───────────────────────────────── */
+    .book-3d-wrap { perspective: 900px; flex-shrink: 0; }
+
+    .book-3d {
+      width: 105px; height: 150px;
+      position: relative;
+      transform: rotateY(-18deg);
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+
+    .book-3d:hover { transform: rotateY(-5deg); }
+
+    .book-face {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, #3b2410 0%, #1a0e06 100%);
+      border-radius: 2px 5px 5px 2px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 12px 8px; text-align: center;
+      box-shadow: inset -3px 0 8px rgba(0,0,0,0.5);
+      border-left: 2px solid rgba(212,178,110,0.3);
+    }
+
+    /* Brilho sutil na capa */
+    .book-face::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(125deg, rgba(212,178,110,0.07) 0%, transparent 45%);
+      border-radius: inherit; pointer-events: none;
+    }
+
+    .book-pages {
+      position: absolute; top: 2px; right: -5px;
+      width: 5px; height: 146px;
+      background: repeating-linear-gradient(
+        to bottom,
+        #e8dcc8 0px, #e8dcc8 1px,
+        #f4ede0 1px, #f4ede0 3px
+      );
+      border-radius: 0 1px 1px 0;
+    }
+
+    .book-spine {
+      position: absolute; top: 0; right: -7px;
+      width: 7px; height: 150px;
+      background: linear-gradient(to right, #c8a87a, #dfc49a);
       border-radius: 0 2px 2px 0;
-      box-shadow: inset -1px 0 3px rgba(0,0,0,0.2);
     }
 
-    .mockup-book-title {
+    .book-3d-ornament {
+      font-size: 16px; margin-bottom: 8px; opacity: 0.7;
+    }
+
+    .book-3d-title {
       font-family: 'Lora', serif;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--accent);
-      line-height: 1.2;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      font-size: 9px; font-weight: 700;
+      color: var(--cap-latte); line-height: 1.4;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.9);
       margin-bottom: 8px;
     }
 
-    .mockup-book-author {
-      font-size: 8px;
-      color: #fff;
-      opacity: 0.8;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    .book-3d-line {
+      width: 28px; height: 1px;
+      background: var(--gold); margin-bottom: 8px;
     }
 
-    .mockup-info {
-      flex: 1;
+    .book-3d-author {
+      font-size: 6px; color: rgba(212,189,151,0.6);
+      text-transform: uppercase; letter-spacing: 1.5px;
     }
 
-    .mockup-title {
+    /* ── BOOK INFO ───────────────────────────────── */
+    .book-info { flex: 1; }
+
+    .book-badge {
+      font-size: 9px; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--cap-latte); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .book-badge::before {
+      content: '';
+      width: 18px; height: 1px;
+      background: var(--gold); display: inline-block;
+    }
+
+    .book-title {
       font-family: 'Lora', serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.3;
-      margin-bottom: 8px;
+      font-size: 17px; font-weight: 700;
+      color: var(--cap-foam); line-height: 1.25; margin-bottom: 6px;
     }
 
-    .mockup-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.5;
-      margin-bottom: 16px;
+    .book-sub {
+      font-size: 12px; color: var(--text-muted);
+      font-style: italic; margin-bottom: 22px; line-height: 1.4;
     }
 
-    .btn-mockup {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dk) 100%);
-      color: #1a1612;
-      font-weight: 600;
-      font-size: 13px;
-      padding: 10px 20px;
-      border-radius: 4px;
+    .btn-book {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--cap-latte) 0%, var(--cap-warm) 100%);
+      color: var(--cap-dark);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600; font-size: 13px;
+      padding: 12px 24px; border-radius: 6px;
       text-decoration: none;
-      box-shadow: 0 4px 10px rgba(212,189,151,0.2);
-      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 18px rgba(180,130,70,0.25);
+      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+      white-space: nowrap;
+      border: 1px solid rgba(212,178,110,0.4);
     }
 
-    .btn-mockup:hover {
+    .btn-book:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(212,189,151,0.4);
+      box-shadow: 0 8px 26px rgba(180,130,70,0.4);
+      filter: brightness(1.06);
     }
 
     /* ── FOOTER ──────────────────────────────────── */
     footer {
-      max-width: 680px;
-      margin: 48px auto 0;
-      padding: 32px 24px 40px;
+      position: relative; z-index: 1;
+      max-width: 640px; margin: 56px auto 0;
+      padding: 32px 24px 52px;
       text-align: center;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--gold);
     }
 
-    .footer-avatar {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent-dk));
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .footer-av {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--cap-latte), var(--cap-warm));
+      display: flex; align-items: center; justify-content: center;
       font-family: 'Lora', serif;
-      font-weight: 700;
-      font-size: 20px;
-      color: #1a1612;
+      font-weight: 700; font-size: 18px;
+      color: var(--cap-dark);
       margin: 0 auto 12px;
+      border: 1px solid var(--gold);
     }
 
     .footer-name {
       font-family: 'Lora', serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 3px;
+      font-size: 15px; font-weight: 600;
+      color: var(--cap-foam); margin-bottom: 3px;
     }
 
-    .footer-role {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
+    .footer-role { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
 
     .footer-ig {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--cap-latte);
+      text-decoration: none; font-weight: 500;
+      transition: opacity 0.2s;
     }
+    .footer-ig:hover { opacity: 0.7; }
 
-    .footer-ig:hover { text-decoration: underline; }
-
-    .footer-copy {
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 24px;
-    }
+    .footer-copy { font-size: 10px; color: var(--text-muted); margin-top: 20px; opacity: 0.5; }
 
     /* ── RESPONSIVE ──────────────────────────────── */
-    @media (max-width: 480px) {
-      h1 { font-size: 24px; }
-      .btn-grid { grid-template-columns: 1fr; }
+    @media (max-width: 500px) {
+      h1 { font-size: 22px; }
+      .btn-grid-3 { grid-template-columns: 1fr; }
       .proof-section { grid-template-columns: 1fr; }
-      .btn-secondary { flex-direction: row; justify-content: flex-start; padding: 14px 16px; }
-      .mockup-card { flex-direction: column; text-align: center; }
-      .mockup-book-wrapper { margin-bottom: 10px; }
+      .btn-card { flex-direction: row; text-align: left; gap: 14px; justify-content: flex-start; }
+      .book-card { flex-direction: column; text-align: center; }
+      .book-badge { justify-content: center; }
+      .book-3d-wrap { margin-bottom: 10px; }
     }
   </style>
 </head>
 <body>
 
+  <!-- HEADER -->
   <header>
     <div class="logo">PLH <span>Preparatórios</span></div>
   </header>
 
+  <!-- HERO -->
   <section class="hero">
-    <span class="eyebrow">Novo livro</span>
-    <h1>Desenvolvimento Sistemático<br>de Adolescentes e Jovens</h1>
+    <span class="eyebrow">Novo Livro</span>
+
+    <h1>
+      Desenvolvimento Sistemático<br>
+      de Adolescentes e Jovens
+    </h1>
+
     <p class="subtitle">Como ele afeta a vida de seu filho?</p>
 
     <div class="author-strip">
       <div class="author-avatar">L</div>
-      <div class="author-info">
+      <div>
         <div class="author-name">Prof. Luiz Henrique Magalhães</div>
         <div class="author-role">Professor · Formador · Autor</div>
       </div>
     </div>
   </section>
 
+  <!-- VIDEO -->
   <section class="video-section">
     <div class="video-wrapper">
+      <!--
+        INSTRUÇÃO: Substitua pelo seu vídeo.
+        Opção 1 — Arquivo direto:
+          <video id="mainVideo" autoplay playsinline src="SEU_VIDEO.mp4"></video>
+        Opção 2 — YouTube sem controles:
+          <iframe src="https://www.youtube.com/embed/SEU_ID?autoplay=1&controls=0&rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      -->
       <div class="video-placeholder">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-          <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2"/>
-          <polygon points="19,15 37,24 19,33" fill="currentColor"/>
+        <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5"/>
+          <polygon points="20,15 36,24 20,33" fill="currentColor"/>
         </svg>
         <p>Insira seu vídeo aqui</p>
       </div>
     </div>
+
     <div class="progress-bar-wrap">
       <div class="progress-bar-fill" id="progressFill"></div>
     </div>
-    <p class="video-note">Assista até o final para ver as opções disponíveis</p>
+
+    <div class="video-meta">
+      <span class="video-note">Assista até o final para ver os links disponíveis</span>
+      <span class="video-time" id="videoTime">0:00 / 6:00</span>
+    </div>
   </section>
 
+  <!-- CTA BUTTONS -->
   <section class="cta-section" id="ctaSection">
-    <a href="https://wa.me/5533999333644?text=Ol%C3%A1%2C%20Professor%20Luiz!%20Assisti%20ao%20v%C3%ADdeo%20e%20quero%20saber%20mais%20sobre%20o%20Desenvolvimento%20Sistem%C3%A1tico."
-       class="btn-primary" target="_blank" rel="noopener">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.856L.057 23.454a.5.5 0 0 0 .608.608l5.598-1.477A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.655-.51-5.178-1.396l-.372-.22-3.852 1.016 1.016-3.853-.22-.372A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-      </svg>
-      <div class="btn-text">
-        <div class="btn-title">Falar com o Professor</div>
-        <div class="btn-sub">Atendimento direto pelo WhatsApp</div>
-      </div>
-    </a>
+    <p class="cta-label">Escolha por onde quer começar</p>
+    <div class="btn-grid-3">
 
-    <div class="btn-grid">
-      <a href="https://mapa-adulto-pronto.lovable.app" class="btn-secondary" target="_blank" rel="noopener">
-        <div class="btn-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <a href="https://mapa-adulto-pronto.lovable.app" class="btn-card" target="_blank" rel="noopener">
+        <div class="btn-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
             <circle cx="9" cy="7" r="4"/>
             <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
             <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
           </svg>
         </div>
-        Comunidade
+        <span class="btn-card-label">Conhecer a<br>Comunidade</span>
       </a>
-      <a href="https://mapa-adulto-pronto.lovable.app" class="btn-secondary" target="_blank" rel="noopener">
-        <div class="btn-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 11l3 3L22 4"/>
-            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+
+      <a href="https://mapa-adulto-pronto.lovable.app" class="btn-card" target="_blank" rel="noopener">
+        <div class="btn-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
           </svg>
         </div>
-        Fazer o Teste
+        <span class="btn-card-label">Fazer Teste de<br>Desenvolvimento</span>
       </a>
-      <a href="#" class="btn-secondary" target="_blank" rel="noopener">
-        <div class="btn-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+      <a href="#" class="btn-card" target="_blank" rel="noopener">
+        <div class="btn-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
             <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
           </svg>
         </div>
-        Ebook Gratuito
+        <span class="btn-card-label">Baixar Grátis<br>o Ebook</span>
       </a>
+
     </div>
   </section>
 
-  <div class="divider">
-    <div class="divider-line"></div>
-    <span class="divider-text">sobre o autor</span>
-    <div class="divider-line"></div>
+  <!-- SEPARATOR -->
+  <div class="sep">
+    <div class="sep-line"></div>
+    <span class="sep-deco">sobre o autor</span>
+    <div class="sep-line"></div>
   </div>
 
+  <!-- PROOF -->
   <section class="proof-section">
     <div class="proof-card">
-      <div class="proof-number">+20</div>
-      <div class="proof-label">anos acompanhando jovens e famílias</div>
+      <div class="proof-num">+20</div>
+      <div class="proof-lbl">anos acompanhando jovens e famílias</div>
     </div>
     <div class="proof-card">
-      <div class="proof-number">8</div>
-      <div class="proof-label">livros publicados sobre desenvolvimento</div>
+      <div class="proof-num">8</div>
+      <div class="proof-lbl">livros publicados</div>
     </div>
     <div class="proof-card">
-      <div class="proof-number">10</div>
-      <div class="proof-label">áreas do desenvolvimento sistemático</div>
+      <div class="proof-num">10</div>
+      <div class="proof-lbl">áreas do desenvolvimento sistemático</div>
     </div>
   </section>
 
-  <section class="mockup-section">
-    <div class="mockup-card">
-      <div class="mockup-book-wrapper">
-        <div class="mockup-book">
-          <div class="mockup-book-title">Desenvolvimento<br>Sistemático</div>
-          <div class="mockup-book-author">PLH</div>
+  <!-- BOOK CTA -->
+  <section class="book-section">
+    <div class="book-card">
+
+      <div class="book-3d-wrap">
+        <div class="book-3d">
+          <div class="book-face">
+            <div class="book-3d-ornament">✦</div>
+            <div class="book-3d-title">Desenvolvimento<br>Sistemático<br>de Adolescentes<br>e Jovens</div>
+            <div class="book-3d-line"></div>
+            <div class="book-3d-author">Luiz H. Magalhães</div>
+          </div>
+          <div class="book-pages"></div>
+          <div class="book-spine"></div>
         </div>
       </div>
-      <div class="mockup-info">
-        <h3 class="mockup-title">Desenvolvimento Sistemático...</h3>
-        <p class="mockup-desc">Descubra os componentes, passos, ambientes, entidades e camadas.</p>
-        <a href="#" class="btn-mockup">Bônus e extras</a>
+
+      <div class="book-info">
+        <div class="book-badge">Novo Livro</div>
+        <div class="book-title">Desenvolvimento Sistemático de Adolescentes e Jovens</div>
+        <div class="book-sub">Como ele afeta a vida de seu filho?</div>
+        <a href="#" class="btn-book" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          Adquirir o Livro
+        </a>
       </div>
+
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
-    <div class="footer-avatar">L</div>
+    <div class="footer-av">L</div>
     <div class="footer-name">Luiz Henrique Magalhães</div>
     <div class="footer-role">Professor · Formador · Fundador do PLH Preparatórios</div>
     <a href="https://instagram.com/professorluiz.plh" class="footer-ig" target="_blank" rel="noopener">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
       </svg>
       @professorluiz.plh
@@ -711,20 +714,31 @@
   </footer>
 
   <script>
-    // TIMER REDUZIDO PARA 10 SEGUNDOS TEMPORARIAMENTE PARA SEUS TESTES
-    const CTA_DELAY = 10; // segundos
+    // ── TIMER ──
+    const CTA_DELAY = 300; // 300 = 5 minutos em produção
+    // const CTA_DELAY = 10; // descomente para testar
+
     const ctaSection = document.getElementById('ctaSection');
     const progressFill = document.getElementById('progressFill');
+    const videoTime = document.getElementById('videoTime');
     let elapsed = 0;
+
+    function fmt(s) {
+      return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    }
 
     const timer = setInterval(() => {
       elapsed++;
-      const pct = Math.min((elapsed / CTA_DELAY) * 100, 100);
-      progressFill.style.width = pct + '%';
+      progressFill.style.width = Math.min((elapsed / CTA_DELAY) * 100, 100) + '%';
+      videoTime.textContent = fmt(elapsed) + ' / ' + fmt(CTA_DELAY);
 
       if (elapsed >= CTA_DELAY) {
         clearInterval(timer);
-        ctaSection.classList.add('visible');
+        ctaSection.style.display = 'block';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          ctaSection.classList.add('animate');
+          ctaSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }));
       }
     }, 1000);
   </script>
