@@ -202,8 +202,26 @@
         inset 0 1px 0 rgba(212,178,110,0.08);
     }
 
-    .video-wrapper video,
-    .video-wrapper iframe { width: 100%; height: 100%; display: block; border: none; }
+    .video-mute-btn {
+      position: absolute;
+      bottom: 12px; right: 12px;
+      width: 36px; height: 36px;
+      background: rgba(20,14,8,0.75);
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      z-index: 10;
+      backdrop-filter: blur(4px);
+    }
+
+    .video-mute-btn:hover {
+      background: rgba(40,28,14,0.90);
+      transform: scale(1.08);
+    }
+
+    .video-mute-btn svg { stroke: var(--cap-latte); }
 
     .video-placeholder {
       width: 100%; height: 100%;
@@ -292,7 +310,7 @@
 
     .btn-grid-3 {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
     }
 
@@ -572,6 +590,7 @@
       .btn-grid-3 { grid-template-columns: 1fr; }
       .proof-section { grid-template-columns: 1fr; }
       .btn-card { flex-direction: row; text-align: left; gap: 14px; justify-content: flex-start; }
+      .btn-grid-3 { grid-template-columns: 1fr; }
       .book-card { flex-direction: column; text-align: center; }
       .book-badge { justify-content: center; }
       .book-3d-wrap { margin-bottom: 10px; }
@@ -611,9 +630,9 @@
       <!--
         INSTRUÇÃO: Substitua pelo seu vídeo.
         Opção 1 — Arquivo direto:
-          <video id="mainVideo" autoplay playsinline src="SEU_VIDEO.mp4"></video>
+          <video id="mainVideo" autoplay playsinline muted src="SEU_VIDEO.mp4"></video>
         Opção 2 — YouTube sem controles:
-          <iframe src="https://www.youtube.com/embed/SEU_ID?autoplay=1&controls=0&rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <iframe id="ytFrame" src="https://www.youtube.com/embed/SEU_ID?autoplay=1&controls=0&mute=1&rel=0&modestbranding=1&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       -->
       <div class="video-placeholder">
         <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
@@ -622,6 +641,16 @@
         </svg>
         <p>Insira seu vídeo aqui</p>
       </div>
+
+      <!-- BOTÃO MUDO/SOM -->
+      <button class="video-mute-btn" id="muteBtn" title="Ativar/desativar som" onclick="toggleMute()">
+        <svg id="muteIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Ícone mudo (padrão) -->
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+          <line x1="23" y1="9" x2="17" y2="15"/>
+          <line x1="17" y1="9" x2="23" y2="15"/>
+        </svg>
+      </button>
     </div>
 
     <div class="progress-bar-wrap">
@@ -652,7 +681,7 @@
 
     <div class="btn-grid-3">
 
-      <a href="https://mapa-adulto-pronto.lovable.app" class="btn-card" target="_blank" rel="noopener">
+      <a href="https://plh-site.vercel.app/" class="btn-card" target="_blank" rel="noopener">
         <div class="btn-card-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -664,7 +693,7 @@
         <span class="btn-card-label">Conhecer a<br>Comunidade</span>
       </a>
 
-      <a href="https://plh-site.vercel.app/" class="btn-card" target="_blank" rel="noopener">
+      <a href="https://mapa-adulto-pronto.lovable.app" class="btn-card" target="_blank" rel="noopener">
         <div class="btn-card-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/>
@@ -674,7 +703,7 @@
         <span class="btn-card-label">Fazer Teste de<br>Desenvolvimento</span>
       </a>
 
-      <a href="#" class="btn-card" target="_blank" rel="noopener">
+      <a href="https://drive.google.com/file/d/1Xun12MNVBxglxrMPZMlDHFmH8LMI87-l/view?usp=sharing" class="btn-card" target="_blank" rel="noopener">
         <div class="btn-card-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
@@ -682,6 +711,15 @@
           </svg>
         </div>
         <span class="btn-card-label">Baixar Grátis<br>o Ebook</span>
+      </a>
+
+      <a href="https://chat.whatsapp.com/Gz85l2zmg3p20XsOqgzB0h" class="btn-card" target="_blank" rel="noopener">
+        <div class="btn-card-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <span class="btn-card-label">Entrar na<br>Comunidade</span>
       </a>
 
     </div>
@@ -759,9 +797,30 @@
   </footer>
 
   <script>
+    // ── MUTE TOGGLE ──
+    let isMuted = true;
+
+    const iconMuted = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>`;
+    const iconSound = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>`;
+
+    function toggleMute() {
+      isMuted = !isMuted;
+      document.getElementById('muteIcon').innerHTML = isMuted ? iconMuted : iconSound;
+
+      // Para vídeo HTML5
+      const vid = document.getElementById('mainVideo');
+      if (vid) vid.muted = isMuted;
+
+      // Para YouTube via postMessage
+      const iframe = document.querySelector('.video-wrapper iframe');
+      if (iframe) {
+        const cmd = isMuted ? 'mute' : 'unMute';
+        iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: cmd }), '*');
+      }
+    }
+
     // ── TIMER ──
-    const CTA_DELAY = 5; // 300 = 5 minutos em produção
-    // const CTA_DELAY = 10; // descomente para testar
+    const CTA_DELAY = 3; // segundos
 
     const ctaSection = document.getElementById('ctaSection');
     const progressFill = document.getElementById('progressFill');
