@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Desenvolvimento Sistemático — Prof. Luiz Henrique Magalhães</title>
-  <meta name="description" content="Mais de 20 anos identificando a lacuna entre a casa e a escola. Conheça o Desenvolvimento Sistemático." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -13,23 +12,24 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-gradient: linear-gradient(135deg, #0f0c08 0%, #26211a 100%); /* Madeira escura / Preto café */
-      --surface: rgba(255, 255, 255, 0.05);
-      --card-bg: rgba(20, 18, 15, 0.8);
-      --border: rgba(212, 189, 151, 0.2); /* Tom de ouro velho */
+      /* PALETA PREMIUM BASEADA NA IMAGEM */
       --text-main: #f4ece2; /* Creme cor de papel antigo */
-      --text-muted: #b5a48b;
+      --text-muted: #b5a48b; /* Bege suave */
       --accent: #d4bd97; /* Dourado suave / Bege livro */
-      --green: #25d366;
-      --radius: 8px; /* Bordas mais retas para parecer livro */
-      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+      --green: #25d366; /* Verde WhatsApp */
+      --radius: 8px; /* Bordas mais retas */
+      --shadow-element: 0 15px 35px rgba(0,0,0,0.6); /* Sombra profunda para relevo */
+      --shadow-button: 0 4px 10px rgba(0,0,0,0.5); /* Sombra menor para botões */
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'DM Sans', sans-serif;
-      background: var(--bg-gradient);
+      /* MUDANÇA CRUCIAL: IMAGEM DE FUNDO REAL PARA TEXTURA */
+      background-image: url('textura-madeira-fundo.jpg'); /* VOCÊ PRECISA DESTA IMAGEM NO GITHUB */
+      background-size: cover;
+      background-position: center top;
       background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
@@ -39,13 +39,13 @@
 
     /* ── HEADER ─────────────────────────────────── */
     header {
-      padding: 20px 24px;
+      padding: 25px 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0,0,0,0.3);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(10px);
+      background: rgba(0,0,0,0.5);
+      border-bottom: 1px solid rgba(212, 189, 151, 0.15);
+      backdrop-filter: blur(8px);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -53,138 +53,160 @@
 
     .logo {
       font-family: 'Lora', serif;
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 600;
       color: var(--accent);
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
     }
 
     /* ── HERO ────────────────────────────────────── */
     .hero {
-      max-width: 800px;
+      max-width: 850px;
       margin: 0 auto;
-      padding: 60px 24px 20px;
+      padding: 70px 24px 30px;
       text-align: center;
-      animation: fadeIn 1s ease both;
     }
-
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     .eyebrow {
       display: inline-block;
       font-size: 12px;
       font-weight: 600;
-      letter-spacing: 2px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
       color: var(--accent);
       border: 1px solid var(--accent);
-      padding: 6px 16px;
+      padding: 8px 20px;
       border-radius: 4px;
-      margin-bottom: 24px;
+      margin-bottom: 30px;
+      background: rgba(212,189,151,0.05);
     }
 
     h1 {
       font-family: 'Lora', serif;
-      font-size: clamp(28px, 6vw, 44px);
+      font-size: clamp(30px, 7vw, 48px);
       font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 20px;
+      line-height: 1.15;
+      margin-bottom: 25px;
       color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
 
     .subtitle {
-      font-size: 18px;
+      font-size: 19px;
       color: var(--text-muted);
-      margin-bottom: 40px;
+      margin-bottom: 50px;
       font-style: italic;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* ── AUTHOR STRIP ────────────────────────────── */
     .author-strip {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      gap: 15px;
+      background: rgba(20, 18, 15, 0.9);
+      border: 1px solid rgba(212, 189, 151, 0.2);
       border-radius: 4px;
-      padding: 10px 20px;
-      margin-bottom: 40px;
+      padding: 12px 25px;
+      margin-bottom: 50px;
+      box-shadow: var(--shadow-element);
     }
 
     .author-avatar {
-      width: 40px; height: 40px; border-radius: 50%;
+      width: 45px; height: 45px; border-radius: 50%;
       background: var(--accent); color: #1a1612;
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Lora', serif; font-weight: 700;
+      font-family: 'Lora', serif; font-weight: 700; font-size: 18px;
     }
 
-    .author-info { text-align: left; }
-    .author-name { font-size: 14px; font-weight: 600; }
-    .author-role { font-size: 12px; color: var(--text-muted); }
+    .author-name { font-size: 15px; font-weight: 600; color: #fff; }
+    .author-role { font-size: 13px; color: var(--text-muted); text-align: left;}
 
     /* ── VIDEO BLOCK ─────────────────────────────── */
-    .video-section { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    .video-section { max-width: 750px; margin: 0 auto; padding: 0 24px; }
     .video-wrapper {
       background: #000;
-      border: 1px solid var(--border);
+      border: 2px solid rgba(212, 189, 151, 0.2);
       border-radius: var(--radius);
       overflow: hidden;
       aspect-ratio: 16 / 9;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-element);
     }
 
     .video-placeholder {
       width: 100%; height: 100%;
       background: radial-gradient(circle, #2a251f 0%, #000 100%);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      color: var(--accent); gap: 10px;
+      color: var(--accent); gap: 15px;
     }
 
-    .progress-bar-wrap { height: 4px; background: rgba(255,255,255,0.1); margin-top: 15px; border-radius: 2px; }
+    .progress-bar-wrap { height: 5px; background: rgba(255,255,255,0.1); margin-top: 20px; border-radius: 3px; }
     .progress-bar-fill { height: 100%; background: var(--accent); width: 0%; transition: width 1s linear; }
 
     /* ── CTA SECTION ─────────────────────────────── */
-    .cta-section { max-width: 720px; margin: 50px auto 0; padding: 0 24px; display: none; }
-    .cta-section.visible { display: block; animation: fadeIn 0.8s ease; }
+    .cta-section { max-width: 750px; margin: 60px auto 0; padding: 0 24px; display: none; }
+    .cta-section.visible { display: block; animation: fadeIn 1s ease; }
 
     .btn-primary {
-      display: flex; align-items: center; justify-content: center; gap: 12px;
-      width: 100%; padding: 20px; background: var(--green); color: #fff;
+      display: flex; align-items: center; justify-content: center; gap: 15px;
+      width: 100%; padding: 22px; background: var(--green); color: #fff;
       text-decoration: none; border-radius: var(--radius); font-weight: 600;
-      margin-bottom: 20px; transition: transform 0.2s;
+      font-size: 15px; letter-spacing: 1px;
+      margin-bottom: 25px; transition: all 0.2s;
+      box-shadow: 0 8px 20px rgba(37,211,102,0.3);
     }
-    .btn-primary:hover { transform: scale(1.02); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(37,211,102,0.4); }
 
-    .btn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .btn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    
+    /* MUDANÇA: BOTÕES COM TEXTURA E MAIS RELEVO */
     .btn-secondary {
-      background: var(--card-bg); border: 1px solid var(--border); color: var(--text-main);
-      padding: 15px; text-decoration: none; text-align: center; font-size: 13px;
+      /* VOCÊ PRECISA DESTA IMAGEM NO GITHUB */
+      background-image: url('textura-botao.jpg'); 
+      background-size: cover;
+      background-position: center;
+      border: 1px solid rgba(212, 189, 151, 0.25); 
+      color: var(--text-main);
+      padding: 20px; text-decoration: none; text-align: center; font-size: 14px;
       border-radius: var(--radius); transition: all 0.3s;
+      box-shadow: var(--shadow-button);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
-    .btn-secondary:hover { border-color: var(--accent); background: rgba(212,189,151,0.1); }
+    .btn-secondary:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.6); }
 
     /* ── PROOF SECTION ───────────────────────────── */
     .proof-section { 
-        max-width: 720px; margin: 60px auto; padding: 0 24px;
-        display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+        max-width: 750px; margin: 80px auto; padding: 0 24px;
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px;
     }
     .proof-card {
-      background: var(--surface); border-left: 2px solid var(--accent);
-      padding: 20px; text-align: center;
+      /* MUDANÇA: FUNDO ESCURO E BORDAS COMO CAPA DE LIVRO */
+      background-image: url('textura-botao.jpg'); 
+      background-size: cover;
+      background-position: center;
+      border: 1px solid rgba(212, 189, 151, 0.2);
+      padding: 25px; text-align: center;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-element);
     }
-    .proof-number { font-family: 'Lora', serif; font-size: 28px; color: var(--accent); }
-    .proof-label { font-size: 12px; color: var(--text-muted); }
+    .proof-number { font-family: 'Lora', serif; font-size: 32px; color: var(--accent); font-weight: 700; margin-bottom: 5px;}
+    .proof-label { font-size: 13px; color: var(--text-muted); line-height: 1.4;}
 
     /* ── FOOTER ──────────────────────────────────── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 60px 24px; text-align: center; margin-top: 80px;
-      background: rgba(0,0,0,0.2);
+      border-top: 1px solid rgba(212, 189, 151, 0.15);
+      padding: 70px 24px; text-align: center; margin-top: 100px;
+      background: rgba(0,0,0,0.4);
     }
+    .footer-name { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 12px; }
 
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       .btn-grid, .proof-section { grid-template-columns: 1fr; }
+      .hero { padding-top: 50px; }
     }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -196,13 +218,13 @@
   <section class="hero">
     <span class="eyebrow">Obra Original</span>
     <h1>Desenvolvimento Sistemático<br>de Adolescentes e Jovens</h1>
-    <p class="subtitle">A lacuna entre a casa e a escola explicada.</p>
+    <p class="subtitle">Como ele afeta a vida de seu filho? A lacuna entre a casa e a escola explicada.</p>
 
     <div class="author-strip">
       <div class="author-avatar">L</div>
       <div class="author-info">
         <div class="author-name">Luiz Henrique Magalhães</div>
-        <div class="author-role">Professor e Formador</div>
+        <div class="author-role">Professor, Formador e Autor</div>
       </div>
     </div>
   </section>
@@ -210,7 +232,7 @@
   <section class="video-section">
     <div class="video-wrapper">
       <div class="video-placeholder">
-        <svg width="50" height="50" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         <p>Apresentação em vídeo</p>
       </div>
     </div>
@@ -221,6 +243,7 @@
 
   <section class="cta-section" id="ctaSection">
     <a href="https://wa.me/5533999333644" class="btn-primary" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 23.454a.5.5 0 0 0 .608.608l5.598-1.477A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.856L.057 23.454zm12 1.546c-6.075 0-11-4.925-11-11S5.925 2 12 2s11 4.925 11 11-4.925 11-11 11zM17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
       <span>FALAR COM O PROFESSOR VIA WHATSAPP</span>
     </a>
 
@@ -247,8 +270,8 @@
   </section>
 
   <footer>
-    <p class="footer-name">Luiz Henrique Magalhães</p>
-    <p style="color: var(--text-muted); font-size: 12px; margin-top: 10px;">
+    <p class="footer-name">Prof. Luiz Henrique Magalhães</p>
+    <p style="color: var(--text-muted); font-size: 13px; margin-top: 12px;">
       © 2026 PLH Preparatórios · Todos os direitos reservados
     </p>
   </footer>
